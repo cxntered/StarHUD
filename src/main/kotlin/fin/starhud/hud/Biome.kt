@@ -35,8 +35,7 @@ class Biome() : Hud(true) {
                 x,
                 y - (icon * 13 * scale),
                 13 * scale,
-                52 * scale,
-                color
+                52 * scale
             )
             ScissorHelper.INSTANCE.resetScissor(vg, scissor)
 

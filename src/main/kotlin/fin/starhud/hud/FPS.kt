@@ -1,8 +1,8 @@
 package fin.starhud.hud
 
+import cc.polyfrost.oneconfig.config.annotations.Button
 import cc.polyfrost.oneconfig.config.annotations.Color
 import cc.polyfrost.oneconfig.config.core.OneColor
-import cc.polyfrost.oneconfig.config.data.OptionSize
 import cc.polyfrost.oneconfig.hud.Hud
 import cc.polyfrost.oneconfig.hud.Position
 import cc.polyfrost.oneconfig.libs.universal.UMatrixStack
@@ -12,9 +12,14 @@ import cc.polyfrost.oneconfig.renderer.asset.Image
 import fin.starhud.util.NVGFlags
 import net.minecraft.client.Minecraft
 
-class FPS() : Hud(true, 5f, 1080f - 13f - 5f) {
-    @Color(name = "Color", size = OptionSize.DUAL)
+class FPS() : Hud(true) {
+    @Color(name = "Color")
     var color = OneColor("#E5ECF8FF")
+
+    @Button(name = "Reset Color", text = "Reset")
+    var resetColor = Runnable {
+        color = OneColor("#E5ECF8FF")
+    }
 
     override fun draw(matrices: UMatrixStack, x: Float, y: Float, scale: Float, example: Boolean) {
         NanoVGHelper.INSTANCE.setupAndDraw(

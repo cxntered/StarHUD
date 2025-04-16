@@ -1,5 +1,6 @@
 package fin.starhud.hud
 
+import cc.polyfrost.oneconfig.config.annotations.Button
 import cc.polyfrost.oneconfig.config.annotations.Color
 import cc.polyfrost.oneconfig.config.annotations.Switch
 import cc.polyfrost.oneconfig.config.core.OneColor
@@ -135,8 +136,13 @@ class Clock {
         @Switch(name = "Use 12 Hour Format", size = OptionSize.DUAL)
         var use12HourFormat = false
 
-        @Color(name = "Color", size = OptionSize.DUAL)
+        @Color(name = "Color")
         var color = OneColor("#FFFFFFFF")
+
+        @Button(name = "Reset Color", text = "Reset")
+        var resetColor = Runnable {
+            color = OneColor("#FFFFFFFF")
+        }
 
         override fun draw(matrices: UMatrixStack, x: Float, y: Float, scale: Float, example: Boolean) {
             val currentTime: Long = java.lang.System.currentTimeMillis()
