@@ -1,0 +1,19 @@
+[
+  {
+    "modid": "${id}",
+    "name": "${name}",
+    "description": "Display fancy HUDs in your game.",
+    "version": "${version}",
+    "mcversion": "${mcVersionStr}",
+    "url": "https://cxntered.dev",
+    "updateUrl": "",
+    "authorList": [
+      "Finside",
+      "cxntered"
+    ],
+    "credits": "",
+    "logoFile": "",
+    "screenshots": [],
+    "dependencies": []
+  }
+]
