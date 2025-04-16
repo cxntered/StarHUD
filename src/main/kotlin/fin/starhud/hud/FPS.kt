@@ -12,7 +12,7 @@ import cc.polyfrost.oneconfig.renderer.asset.Image
 import fin.starhud.util.NVGFlags
 import net.minecraft.client.Minecraft
 
-class FPS() : Hud(true) {
+class FPS : Hud(true) {
     @Color(name = "Color")
     var color = OneColor("#E5ECF8FF")
 

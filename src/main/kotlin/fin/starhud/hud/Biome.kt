@@ -14,7 +14,7 @@ import cc.polyfrost.oneconfig.renderer.scissor.ScissorHelper
 import fin.starhud.config.ModConfig
 import fin.starhud.util.NVGFlags
 
-class Biome() : Hud(true) {
+class Biome : Hud(true) {
     override fun draw(matrices: UMatrixStack, x: Float, y: Float, scale: Float, example: Boolean) {
         val icon = getDimensionIcon(UMinecraft.getWorld()?.provider?.dimensionId ?: 2)
         val color = getTextColorFromDimension(icon)

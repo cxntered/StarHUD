@@ -14,7 +14,7 @@ import fin.starhud.config.ModConfig
 import fin.starhud.util.NVGFlags
 import net.minecraft.util.MathHelper
 
-class Direction() : Hud(true) {
+class Direction : Hud(true) {
     @Switch(name = "Include Ordinal Directions", size = OptionSize.DUAL)
     var includeOrdinalDirections = false
 
