@@ -104,6 +104,5 @@ class Direction() : Hud(true) {
     init {
         this.position = Position(this, 26f, 13f + 6f, getWidth(scale, true), getHeight(scale, true))
         this.position.anchor = Position.AnchorPosition.TOP_CENTER
-        this.positionAlignment = 2
     }
 }

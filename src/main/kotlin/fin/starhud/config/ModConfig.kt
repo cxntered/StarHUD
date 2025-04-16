@@ -22,11 +22,14 @@ object ModConfig : Config(Mod(StarHUD.NAME, ModType.HUD, "/${StarHUD.NAME}.png")
     @Page(name = "Dimension Colors", location = PageLocation.BOTTOM, category = "Biome")
     var dimensionColors = DimensionColors()
 
-    @HUD(name = "In-Game", category = "Clock", subcategory = "In-Game")
+    @HUD(name = "Clock", category = "Clock", subcategory = "In-Game")
     var inGameClock = Clock.InGame()
 
     @Page(name = "In-Game Clock Colors", location = PageLocation.BOTTOM, category = "Clock", subcategory = "In-Game")
     var inGameClockColors = InGameClockColors()
+
+    @HUD(name = "Clock", category = "Clock", subcategory = "System")
+    var realTimeClock = Clock.System()
 
     @HUD(name = "Direction", category = "Direction")
     var direction = Direction()

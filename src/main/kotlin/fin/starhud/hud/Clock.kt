@@ -1,6 +1,8 @@
 package fin.starhud.hud
 
+import cc.polyfrost.oneconfig.config.annotations.Color
 import cc.polyfrost.oneconfig.config.annotations.Switch
+import cc.polyfrost.oneconfig.config.core.OneColor
 import cc.polyfrost.oneconfig.config.data.OptionSize
 import cc.polyfrost.oneconfig.hud.Hud
 import cc.polyfrost.oneconfig.hud.Position
@@ -13,6 +15,8 @@ import cc.polyfrost.oneconfig.renderer.scissor.ScissorHelper
 import fin.starhud.config.ModConfig
 import fin.starhud.util.NVGFlags
 import net.minecraft.world.World
+import java.text.SimpleDateFormat
+import java.util.*
 
 class Clock {
     class InGame : Hud(true) {
@@ -124,7 +128,70 @@ class Clock {
         init {
             this.position = Position(this, -29f, 13f + 6f, getWidth(scale, true), getHeight(scale, true))
             this.position.anchor = Position.AnchorPosition.TOP_CENTER
-            this.positionAlignment = 2
+        }
+    }
+
+    class System : Hud(true) {
+        @Switch(name = "Use 12 Hour Format", size = OptionSize.DUAL)
+        var use12HourFormat = false
+
+        @Color(name = "Color", size = OptionSize.DUAL)
+        var color = OneColor("#FFFFFFFF")
+
+        override fun draw(matrices: UMatrixStack, x: Float, y: Float, scale: Float, example: Boolean) {
+            val currentTime: Long = java.lang.System.currentTimeMillis()
+            val text = if (use12HourFormat) {
+                SimpleDateFormat("hh:mm a").format(Date(currentTime))
+            } else {
+                SimpleDateFormat("HH:mm").format(Date(currentTime))
+            }
+
+            NanoVGHelper.INSTANCE.setupAndDraw(
+                true
+            ) { vg: Long ->
+                val scissor = ScissorHelper.INSTANCE.scissor(
+                    vg,
+                    x,
+                    y,
+                    (if (use12HourFormat) 65 else 49) * scale,
+                    13 * scale
+                )
+                NanoVGHelper.INSTANCE.drawImage(
+                    vg,
+                    Image(
+                        "/assets/starhud/hud/clock_${if (use12HourFormat) "12" else "24"}.png",
+                        NVGFlags.NVG_IMAGE_NEAREST
+                    ),
+                    x,
+                    y,
+                    (if (use12HourFormat) 65 else 49) * scale,
+                    65 * scale,
+                    color.rgbNoAlpha
+                )
+                ScissorHelper.INSTANCE.resetScissor(vg, scissor)
+            }
+
+            TextRenderer.drawScaledString(
+                text,
+                x + (19 * scale),
+                y + (3 * scale),
+                color.rgbNoAlpha,
+                TextRenderer.TextType.toType(0),
+                scale
+            )
+        }
+
+        override fun getWidth(scale: Float, example: Boolean): Float {
+            return (if (use12HourFormat) 65 else 49) * scale
+        }
+
+        override fun getHeight(scale: Float, example: Boolean): Float {
+            return 13 * scale
+        }
+
+        init {
+            this.position = Position(this, -5f, -5f, getWidth(scale, true), getHeight(scale, true))
+            this.position.anchor = Position.AnchorPosition.BOTTOM_RIGHT
         }
     }
 }

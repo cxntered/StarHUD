@@ -102,6 +102,6 @@ class Biome() : Hud(true) {
     init {
         this.position = Position(this, 0f, 5f, getWidth(scale, true), getHeight(scale, true))
         this.position.anchor = Position.AnchorPosition.TOP_CENTER
-        this.positionAlignment = 2
+        this.positionAlignment = 2 // center
     }
 }

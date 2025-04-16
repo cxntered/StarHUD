@@ -4,6 +4,7 @@ import cc.polyfrost.oneconfig.config.annotations.Color
 import cc.polyfrost.oneconfig.config.core.OneColor
 import cc.polyfrost.oneconfig.config.data.OptionSize
 import cc.polyfrost.oneconfig.hud.Hud
+import cc.polyfrost.oneconfig.hud.Position
 import cc.polyfrost.oneconfig.libs.universal.UMatrixStack
 import cc.polyfrost.oneconfig.renderer.NanoVGHelper
 import cc.polyfrost.oneconfig.renderer.TextRenderer
@@ -46,5 +47,10 @@ class FPS() : Hud(true, 5f, 1080f - 13f - 5f) {
 
     override fun getHeight(scale: Float, example: Boolean): Float {
         return 13 * scale
+    }
+
+    init {
+        this.position = Position(this, 5f, -5f, getWidth(scale, true), getHeight(scale, true))
+        this.position.anchor = Position.AnchorPosition.BOTTOM_LEFT
     }
 }
