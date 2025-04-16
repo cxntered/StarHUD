@@ -7,6 +7,7 @@ import cc.polyfrost.oneconfig.config.data.Mod
 import cc.polyfrost.oneconfig.config.data.ModType
 import cc.polyfrost.oneconfig.config.data.PageLocation
 import fin.starhud.StarHUD
+import fin.starhud.config.page.DimensionColors
 import fin.starhud.config.page.DirectionColors
 import fin.starhud.config.page.InGameClockColors
 import fin.starhud.hud.Biome
@@ -18,10 +19,13 @@ object ModConfig : Config(Mod(StarHUD.NAME, ModType.HUD, "/${StarHUD.NAME}.png")
     @HUD(name = "Biome", category = "Biome")
     var biome = Biome()
 
-    @HUD(name = "In-Game", category = "Clock")
+    @Page(name = "Dimension Colors", location = PageLocation.BOTTOM, category = "Biome")
+    var dimensionColors = DimensionColors()
+
+    @HUD(name = "In-Game", category = "Clock", subcategory = "In-Game")
     var inGameClock = Clock.InGame()
 
-    @Page(name = "In-Game Clock Colors", location = PageLocation.BOTTOM, category = "Clock")
+    @Page(name = "In-Game Clock Colors", location = PageLocation.BOTTOM, category = "Clock", subcategory = "In-Game")
     var inGameClockColors = InGameClockColors()
 
     @HUD(name = "Direction", category = "Direction")
