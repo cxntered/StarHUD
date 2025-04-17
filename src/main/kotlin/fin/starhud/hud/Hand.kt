@@ -96,6 +96,10 @@ class Hand : Hud(true) {
         return 13 * scale
     }
 
+    override fun shouldShow(): Boolean {
+        return super.shouldShow() && getHeldItem() != null
+    }
+
     private fun getHeldItem(): ItemStack? {
         return UPlayer.getPlayer()?.heldItem
     }

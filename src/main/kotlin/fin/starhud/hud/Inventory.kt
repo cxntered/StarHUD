@@ -1,5 +1,6 @@
 package fin.starhud.hud
 
+import cc.polyfrost.oneconfig.config.annotations.Exclude
 import cc.polyfrost.oneconfig.config.annotations.Switch
 import cc.polyfrost.oneconfig.hud.Hud
 import cc.polyfrost.oneconfig.hud.Position
@@ -16,8 +17,10 @@ class Inventory : Hud(true) {
     @Switch(name = "Draw Vertical")
     var drawVertical = true
 
+    @Exclude
+    var foundItem = false
+
     override fun draw(matrices: UMatrixStack, x: Float, y: Float, scale: Float, example: Boolean) {
-        var foundItem = false
         var itemX: Int
         var itemY: Int
 
@@ -62,6 +65,10 @@ class Inventory : Hud(true) {
 
     override fun getHeight(scale: Float, example: Boolean): Float {
         return (if (drawVertical) 206 else 68) * scale
+    }
+
+    override fun shouldShow(): Boolean {
+        return super.shouldShow() && foundItem
     }
 
     private fun renderItem(item: ItemStack, x: Float, y: Float, itemX: Int, itemY: Int, scale: Float) {

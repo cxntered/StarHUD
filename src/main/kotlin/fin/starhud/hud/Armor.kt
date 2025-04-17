@@ -1,18 +1,11 @@
 package fin.starhud.hud
 
-import cc.polyfrost.oneconfig.config.core.OneColor
 import cc.polyfrost.oneconfig.hud.Hud
 import cc.polyfrost.oneconfig.hud.Position
 import cc.polyfrost.oneconfig.libs.universal.UMatrixStack
 import cc.polyfrost.oneconfig.libs.universal.wrappers.UPlayer
 import cc.polyfrost.oneconfig.renderer.NanoVGHelper
-import cc.polyfrost.oneconfig.renderer.asset.Image
-import cc.polyfrost.oneconfig.renderer.scissor.ScissorHelper
 import fin.starhud.util.ItemDurability
-import fin.starhud.util.NVGFlags
-import net.minecraft.client.entity.EntityPlayerSP
-import net.minecraft.item.ItemStack
-import kotlin.math.roundToInt
 
 class Armor {
     class Helmet : Hud(true) {
@@ -37,6 +30,10 @@ class Armor {
 
         override fun getHeight(scale: Float, example: Boolean): Float {
             return 13 * scale
+        }
+
+        override fun shouldShow(): Boolean {
+            return super.shouldShow() && UPlayer.getPlayer()?.inventory?.armorItemInSlot(3) != null
         }
 
         init {
@@ -69,6 +66,10 @@ class Armor {
             return 13 * scale
         }
 
+        override fun shouldShow(): Boolean {
+            return super.shouldShow() && UPlayer.getPlayer()?.inventory?.armorItemInSlot(2) != null
+        }
+
         init {
             this.position = Position(this, 5f, -20f + 14f, getWidth(scale, true), getHeight(scale, true))
             this.position.anchor = Position.AnchorPosition.MIDDLE_LEFT
@@ -99,6 +100,10 @@ class Armor {
             return 13 * scale
         }
 
+        override fun shouldShow(): Boolean {
+            return super.shouldShow() && UPlayer.getPlayer()?.inventory?.armorItemInSlot(1) != null
+        }
+
         init {
             this.position = Position(this, 5f, -20f + (14f * 2), getWidth(scale, true), getHeight(scale, true))
             this.position.anchor = Position.AnchorPosition.MIDDLE_LEFT
@@ -127,6 +132,10 @@ class Armor {
 
         override fun getHeight(scale: Float, example: Boolean): Float {
             return 13 * scale
+        }
+
+        override fun shouldShow(): Boolean {
+            return super.shouldShow() && UPlayer.getPlayer()?.inventory?.armorItemInSlot(0) != null
         }
 
         init {

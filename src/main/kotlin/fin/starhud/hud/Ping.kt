@@ -61,6 +61,10 @@ class Ping : Hud(true) {
         return 13 * scale
     }
 
+    override fun shouldShow(): Boolean {
+        return super.shouldShow() && !UMinecraft.getMinecraft().isSingleplayer
+    }
+
     private fun getPingColor(step: Int): Int {
         return when (step) {
             0 -> ModConfig.pingColors.excellent.rgbNoAlpha
