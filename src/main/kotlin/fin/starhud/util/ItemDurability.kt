@@ -1,11 +1,11 @@
 package fin.starhud.util
 
-import cc.polyfrost.oneconfig.config.core.OneColor
 import cc.polyfrost.oneconfig.renderer.NanoVGHelper
 import cc.polyfrost.oneconfig.renderer.asset.Image
 import cc.polyfrost.oneconfig.renderer.scissor.ScissorHelper
 import net.minecraft.client.entity.EntityPlayerSP
 import net.minecraft.item.ItemStack
+import net.minecraft.util.MathHelper
 import kotlin.math.roundToInt
 
 object ItemDurability {
@@ -38,7 +38,7 @@ object ItemDurability {
             y + (3 * scale),
             40 * scale,
             7 * scale,
-            color
+            color or 0xFF000000.toInt()
         )
         ScissorHelper.INSTANCE.resetScissor(vg, scissor)
     }
@@ -76,32 +76,6 @@ object ItemDurability {
 
     // color transition from pastel (red to green)
     private fun getItemBarColor(step: Int): Int {
-        return hsvToRgb(0.35F * step / 10.0F, 0.45F, 0.95F);
-    }
-
-    // taken from modern minecraft and converted to kotlin
-    private fun hsvToRgb(hue: Float, saturation: Float, value: Float): Int {
-        val hueSector = (hue * 6.0f).toInt() % 6
-        val fractionalSector = hue * 6.0f - hueSector
-
-        val p = value * (1.0f - saturation)
-        val q = value * (1.0f - fractionalSector * saturation)
-        val t = value * (1.0f - (1.0f - fractionalSector) * saturation)
-
-        val (red, green, blue) = when (hueSector) {
-            0 -> Triple(value, t, p)
-            1 -> Triple(q, value, p)
-            2 -> Triple(p, value, t)
-            3 -> Triple(p, q, value)
-            4 -> Triple(t, p, value)
-            5 -> Triple(value, p, q)
-            else -> throw RuntimeException("Something went wrong when converting from HSV to RGB. Input HSV: ($hue, $saturation, $value)")
-        }
-
-        return OneColor(
-            (red * 255).toInt().coerceIn(0, 255),
-            (green * 255).toInt().coerceIn(0, 255),
-            (blue * 255).toInt().coerceIn(0, 255)
-        ).rgbNoAlpha
+        return MathHelper.hsvToRGB(0.35F * step / 10.0F, 0.45F, 0.95F);
     }
 }
