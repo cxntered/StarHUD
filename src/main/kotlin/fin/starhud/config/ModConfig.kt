@@ -60,4 +60,7 @@ object ModConfig : Config(Mod(StarHUD.NAME, ModType.HUD, "/${StarHUD.NAME}.png")
 
     @HUD(name = "Hand", category = "Hand")
     var hand = Hand()
+
+    @HUD(name = "Inventory", category = "Inventory")
+    var inventory = Inventory()
 }
