@@ -95,8 +95,12 @@ class Clock {
         private fun getWorldStatus(world: World): Int {
             return if (world.isThundering) 4
             else if (world.isRaining) 3
-            else if (!world.isDaytime) 2
+            else if (isNighttime(world)) 2
             else 1
+        }
+
+        private fun isNighttime(world: World): Boolean {
+            return world.worldTime % 24000 in 13000 until 23000
         }
 
         private fun getMilitaryTime(hours: Int, minutes: Int): String {
