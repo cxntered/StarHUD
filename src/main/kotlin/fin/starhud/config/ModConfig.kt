@@ -10,6 +10,7 @@ import fin.starhud.StarHUD
 import fin.starhud.config.page.DimensionColors
 import fin.starhud.config.page.DirectionColors
 import fin.starhud.config.page.InGameClockColors
+import fin.starhud.config.page.PingColors
 import fin.starhud.hud.*
 
 object ModConfig : Config(Mod(StarHUD.NAME, ModType.HUD, "/${StarHUD.NAME}.png"), "${StarHUD.MODID}.json") {
@@ -63,4 +64,10 @@ object ModConfig : Config(Mod(StarHUD.NAME, ModType.HUD, "/${StarHUD.NAME}.png")
 
     @HUD(name = "Inventory", category = "Inventory")
     var inventory = Inventory()
+
+    @HUD(name = "Ping", category = "Ping")
+    var ping = Ping()
+
+    @Page(name = "Ping Colors", location = PageLocation.BOTTOM, category = "Ping")
+    var pingColors = PingColors()
 }

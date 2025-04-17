@@ -21,7 +21,7 @@ class Inventory : Hud(true) {
         var itemX: Int
         var itemY: Int
 
-        for (i in 0..26) {
+        for (i in 0 until 27) {
             val inventory = UMinecraft.getPlayer()?.inventory ?: return
             val item = inventory.mainInventory?.get(i + 9) ?: continue
 
