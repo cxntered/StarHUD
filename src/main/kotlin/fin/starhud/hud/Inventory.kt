@@ -1,6 +1,5 @@
 package fin.starhud.hud
 
-import cc.polyfrost.oneconfig.config.annotations.Exclude
 import cc.polyfrost.oneconfig.config.annotations.Switch
 import cc.polyfrost.oneconfig.hud.Hud
 import cc.polyfrost.oneconfig.hud.Position
@@ -17,35 +16,28 @@ class Inventory : Hud(true) {
     @Switch(name = "Draw Vertical")
     var drawVertical = true
 
-    @Exclude
-    var foundItem = false
-
     override fun draw(matrices: UMatrixStack, x: Float, y: Float, scale: Float, example: Boolean) {
+        NanoVGHelper.INSTANCE.setupAndDraw(
+            true
+        ) { vg: Long ->
+            NanoVGHelper.INSTANCE.drawImage(
+                vg,
+                Image(
+                    "/assets/starhud/hud/inventory${if (drawVertical) "_vertical" else ""}.png",
+                    NVGFlags.NVG_IMAGE_NEAREST
+                ),
+                x,
+                y,
+                (if (drawVertical) 68 else 206) * scale,
+                (if (drawVertical) 206 else 68) * scale
+            )
+        }
+
         var itemX: Int
         var itemY: Int
 
         for (i in 0 until 27) {
-            val inventory = UMinecraft.getPlayer()?.inventory ?: return
-            val item = inventory.mainInventory?.get(i + 9) ?: continue
-
-            if (!foundItem) {
-                foundItem = true
-                NanoVGHelper.INSTANCE.setupAndDraw(
-                    true
-                ) { vg: Long ->
-                    NanoVGHelper.INSTANCE.drawImage(
-                        vg,
-                        Image(
-                            "/assets/starhud/hud/inventory${if (drawVertical) "_vertical" else ""}.png",
-                            NVGFlags.NVG_IMAGE_NEAREST
-                        ),
-                        x,
-                        y,
-                        (if (drawVertical) 68 else 206) * scale,
-                        (if (drawVertical) 206 else 68) * scale
-                    )
-                }
-            }
+            val item = UMinecraft.getPlayer()?.inventory?.mainInventory?.get(i + 9) ?: continue
 
             if (drawVertical) {
                 itemX = 49 - (i / 9) * 23
@@ -68,7 +60,8 @@ class Inventory : Hud(true) {
     }
 
     override fun shouldShow(): Boolean {
-        return super.shouldShow() && foundItem
+        return super.shouldShow() && UMinecraft.getPlayer()?.inventory?.mainInventory?.slice(9 until 36)
+            ?.any { it != null } == true
     }
 
     private fun renderItem(item: ItemStack, x: Float, y: Float, itemX: Int, itemY: Int, scale: Float) {
