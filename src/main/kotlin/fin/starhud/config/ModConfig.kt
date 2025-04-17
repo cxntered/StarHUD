@@ -57,4 +57,7 @@ object ModConfig : Config(Mod(StarHUD.NAME, ModType.HUD, "/${StarHUD.NAME}.png")
 
     @HUD(name = "FPS", category = "FPS")
     var fps = FPS()
+
+    @HUD(name = "Hand", category = "Hand")
+    var hand = Hand()
 }
