@@ -15,9 +15,7 @@ import kotlin.math.min
 
 class Ping : Hud(true) {
     override fun draw(matrices: UMatrixStack, x: Float, y: Float, scale: Float, example: Boolean) {
-        if (UMinecraft.getMinecraft().isSingleplayer) return
-
-        val ping = ServerPinger.averagePing.toInt()
+        val ping = if (example) 123 else ServerPinger.averagePing.toInt()
         val step = min(ping / 150.0, 3.0).toInt()
         val color = getPingColor(step)
 

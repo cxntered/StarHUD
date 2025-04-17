@@ -1,5 +1,6 @@
 package fin.starhud.hud
 
+import cc.polyfrost.oneconfig.config.annotations.Exclude
 import cc.polyfrost.oneconfig.config.annotations.Switch
 import cc.polyfrost.oneconfig.hud.Hud
 import cc.polyfrost.oneconfig.hud.Position
@@ -10,11 +11,20 @@ import cc.polyfrost.oneconfig.renderer.NanoVGHelper
 import cc.polyfrost.oneconfig.renderer.asset.Image
 import fin.starhud.util.NVGFlags
 import net.minecraft.client.renderer.RenderHelper
+import net.minecraft.init.Items
 import net.minecraft.item.ItemStack
 
 class Inventory : Hud(true) {
     @Switch(name = "Draw Vertical")
     var drawVertical = true
+
+    @Exclude
+    val exampleInventory: Array<ItemStack?> = arrayOfNulls<ItemStack>(36).apply {
+        this[13] = ItemStack(Items.diamond, 64)
+        this[21] = ItemStack(Items.diamond, 64)
+        this[23] = ItemStack(Items.diamond, 64)
+        this[31] = ItemStack(Items.diamond, 64)
+    }
 
     override fun draw(matrices: UMatrixStack, x: Float, y: Float, scale: Float, example: Boolean) {
         NanoVGHelper.INSTANCE.setupAndDraw(
@@ -37,7 +47,8 @@ class Inventory : Hud(true) {
         var itemY: Int
 
         for (i in 0 until 27) {
-            val item = UMinecraft.getPlayer()?.inventory?.mainInventory?.get(i + 9) ?: continue
+            val inventory = if (example) exampleInventory else UMinecraft.getPlayer()?.inventory?.mainInventory ?: continue
+            val item = inventory[i + 9] ?: continue
 
             if (drawVertical) {
                 itemX = 49 - (i / 9) * 23

@@ -3,7 +3,6 @@ package fin.starhud.util
 import cc.polyfrost.oneconfig.renderer.NanoVGHelper
 import cc.polyfrost.oneconfig.renderer.asset.Image
 import cc.polyfrost.oneconfig.renderer.scissor.ScissorHelper
-import net.minecraft.client.entity.EntityPlayerSP
 import net.minecraft.item.ItemStack
 import net.minecraft.util.MathHelper
 import kotlin.math.roundToInt
@@ -43,10 +42,7 @@ object ItemDurability {
         ScissorHelper.INSTANCE.resetScissor(vg, scissor)
     }
 
-    fun renderArmorHud(vg: Long, player: EntityPlayerSP?, index: Int, x: Float, y: Float, scale: Float) {
-        val inventory = player?.inventory ?: return
-        val item = inventory.armorItemInSlot(3 - index) ?: return
-
+    fun renderArmorHud(vg: Long, item: ItemStack, index: Int, x: Float, y: Float, scale: Float) {
         // draw the icon
         val scissor = ScissorHelper.INSTANCE.scissor(
             vg,

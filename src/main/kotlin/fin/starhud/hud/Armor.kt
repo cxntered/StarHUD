@@ -6,16 +6,21 @@ import cc.polyfrost.oneconfig.libs.universal.UMatrixStack
 import cc.polyfrost.oneconfig.libs.universal.wrappers.UPlayer
 import cc.polyfrost.oneconfig.renderer.NanoVGHelper
 import fin.starhud.util.ItemDurability
+import net.minecraft.init.Items
+import net.minecraft.item.ItemStack
 
 class Armor {
     class Helmet : Hud(true) {
         override fun draw(matrices: UMatrixStack, x: Float, y: Float, scale: Float, example: Boolean) {
+            val item: ItemStack =
+                if (example) ItemStack(Items.diamond_helmet)
+                else UPlayer.getPlayer()?.inventory?.armorItemInSlot(3) ?: return
             NanoVGHelper.INSTANCE.setupAndDraw(
                 true
             ) { vg: Long ->
                 ItemDurability.renderArmorHud(
                     vg,
-                    UPlayer.getPlayer(),
+                    item,
                     0,
                     x,
                     y,
@@ -44,12 +49,15 @@ class Armor {
 
     class Chestplate : Hud(true) {
         override fun draw(matrices: UMatrixStack, x: Float, y: Float, scale: Float, example: Boolean) {
+            val item: ItemStack =
+                if (example) ItemStack(Items.diamond_chestplate)
+                else UPlayer.getPlayer()?.inventory?.armorItemInSlot(2) ?: return
             NanoVGHelper.INSTANCE.setupAndDraw(
                 true
             ) { vg: Long ->
                 ItemDurability.renderArmorHud(
                     vg,
-                    UPlayer.getPlayer(),
+                    item,
                     1,
                     x,
                     y,
@@ -78,12 +86,15 @@ class Armor {
 
     class Leggings : Hud(true) {
         override fun draw(matrices: UMatrixStack, x: Float, y: Float, scale: Float, example: Boolean) {
+            val item: ItemStack =
+                if (example) ItemStack(Items.diamond_leggings)
+                else UPlayer.getPlayer()?.inventory?.armorItemInSlot(1) ?: return
             NanoVGHelper.INSTANCE.setupAndDraw(
                 true
             ) { vg: Long ->
                 ItemDurability.renderArmorHud(
                     vg,
-                    UPlayer.getPlayer(),
+                    item,
                     2,
                     x,
                     y,
@@ -112,12 +123,15 @@ class Armor {
 
     class Boots : Hud(true) {
         override fun draw(matrices: UMatrixStack, x: Float, y: Float, scale: Float, example: Boolean) {
+            val item: ItemStack =
+                if (example) ItemStack(Items.diamond_boots)
+                else UPlayer.getPlayer()?.inventory?.armorItemInSlot(0) ?: return
             NanoVGHelper.INSTANCE.setupAndDraw(
                 true
             ) { vg: Long ->
                 ItemDurability.renderArmorHud(
                     vg,
-                    UPlayer.getPlayer(),
+                    item,
                     3,
                     x,
                     y,

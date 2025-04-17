@@ -14,6 +14,7 @@ import cc.polyfrost.oneconfig.renderer.asset.Image
 import cc.polyfrost.oneconfig.renderer.scissor.ScissorHelper
 import fin.starhud.util.ItemDurability
 import fin.starhud.util.NVGFlags
+import net.minecraft.init.Items
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 
@@ -33,7 +34,7 @@ class Hand : Hud(true) {
     }
 
     override fun draw(matrices: UMatrixStack, x: Float, y: Float, scale: Float, example: Boolean) {
-        val item = getHeldItem() ?: return
+        val item = if (example) ItemStack(Items.diamond_sword) else getHeldItem() ?: return
 
         NanoVGHelper.INSTANCE.setupAndDraw(
             true
@@ -89,7 +90,7 @@ class Hand : Hud(true) {
     }
 
     override fun getWidth(scale: Float, example: Boolean): Float {
-        return (if (getHeldItem()?.isItemStackDamageable != false) 63 else 47) * scale
+        return (if (getHeldItem()?.isItemStackDamageable != false || example) 63 else 47) * scale
     }
 
     override fun getHeight(scale: Float, example: Boolean): Float {
