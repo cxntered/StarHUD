@@ -13,6 +13,18 @@ import fin.starhud.config.page.InGameClockColors
 import fin.starhud.hud.*
 
 object ModConfig : Config(Mod(StarHUD.NAME, ModType.HUD, "/${StarHUD.NAME}.png"), "${StarHUD.MODID}.json") {
+    @HUD(name = "Helmet", category = "Armor")
+    var helmet = Armor.Helmet()
+
+    @HUD(name = "Chestplate", category = "Armor")
+    var chestplate = Armor.Chestplate()
+
+    @HUD(name = "Leggings", category = "Armor")
+    var leggings = Armor.Leggings()
+
+    @HUD(name = "Boots", category = "Armor")
+    var boots = Armor.Boots()
+
     @HUD(name = "Biome", category = "Biome")
     var biome = Biome()
 
