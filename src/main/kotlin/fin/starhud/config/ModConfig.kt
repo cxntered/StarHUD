@@ -50,6 +50,9 @@ object ModConfig : Config(Mod(StarHUD.NAME, ModType.HUD, "/${StarHUD.NAME}.png")
     @HUD(name = "Z Coordinate", category = "Coordinates")
     var zCoordinate = Coordinates.ZCoordinate()
 
+    @HUD(name = "Day Count", category = "Day Count")
+    var dayCount = Day()
+
     @HUD(name = "Direction", category = "Direction")
     var direction = Direction()
 

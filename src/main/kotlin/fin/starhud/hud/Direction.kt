@@ -13,6 +13,7 @@ import cc.polyfrost.oneconfig.renderer.scissor.ScissorHelper
 import fin.starhud.config.ModConfig
 import fin.starhud.util.NVGFlags
 import net.minecraft.util.MathHelper
+import kotlin.math.roundToInt
 
 class Direction : Hud(true) {
     @Switch(name = "Include Ordinal Directions", size = OptionSize.DUAL)
@@ -20,7 +21,7 @@ class Direction : Hud(true) {
 
     override fun draw(matrices: UMatrixStack, x: Float, y: Float, scale: Float, example: Boolean) {
         val player = UPlayer.getPlayer() ?: return
-        val yaw = Math.round(MathHelper.wrapAngleTo180_float(player.rotationYaw) * 10.0f) / 10.0f
+        val yaw = (MathHelper.wrapAngleTo180_float(player.rotationYaw) * 10.0f).roundToInt() / 10.0f
         val icon = if (includeOrdinalDirections) getOrdinalDirectionIcon(yaw) else getCardinalDirectionIcon(yaw)
         val color = if (includeOrdinalDirections) getDirectionColor(icon) else getDirectionColor(icon * 2)
 

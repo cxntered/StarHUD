@@ -16,6 +16,7 @@ import fin.starhud.util.NVGFlags
 
 class Biome : Hud(true) {
     override fun draw(matrices: UMatrixStack, x: Float, y: Float, scale: Float, example: Boolean) {
+        val biome = getBiomeName()
         val icon = getDimensionIcon(UMinecraft.getWorld()?.provider?.dimensionId ?: 2)
         val color = getTextColorFromDimension(icon)
 
@@ -39,7 +40,7 @@ class Biome : Hud(true) {
             )
             ScissorHelper.INSTANCE.resetScissor(vg, scissor)
 
-            val width = Platform.getGLPlatform().getStringWidth(getBiomeName())
+            val width = Platform.getGLPlatform().getStringWidth(biome)
             NanoVGHelper.INSTANCE.drawRect(
                 vg,
                 x + (14 * scale),
@@ -59,7 +60,7 @@ class Biome : Hud(true) {
         }
 
         TextRenderer.drawScaledString(
-            getBiomeName(),
+            biome,
             x + (19 * scale),
             y + (3 * scale),
             color,
